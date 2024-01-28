@@ -26,8 +26,8 @@ router.post("/", function (req, res) {
   if (req.body.email) {
     friends[req.body.email] = {
       "firstName": req.body.firstName,
-      //Add similarly for lastName
-      //Add similarly for DOB
+      "lastName": req.body.lastName,
+      "DOB": req.body.DOB
     }
   }
   res.send("The user" + (' ') + (req.body.firstName) + " Has been added!");
@@ -40,6 +40,8 @@ router.put("/:email", function (req, res) {
   let friend = friends[email]
   if (friend) { //Check is friend exists
     let DOB = req.body.DOB;
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
     //Add similarly for firstName
     //Add similarly for lastName
 
@@ -48,7 +50,13 @@ router.put("/:email", function (req, res) {
       friend["DOB"] = DOB
     }
     //Add similarly for firstName
+    if (firstName) {
+      friend["firstName"] = firstName
+    }
     //Add similarly for lastName
+    if (lastName) {
+      friend["lastName"] = lastName
+    }
     friends[email] = friend;
     res.send(`Friend with the email  ${email} updated.`);
   }
